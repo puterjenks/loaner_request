@@ -30,7 +30,7 @@
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 
 			g_scratchpad.city = current.requested_for.city;
-			g_scratchpad.country = current.requested_for.country;
+			g_scratchpad.country = current.requested_for.country_code;
 	
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -39,7 +39,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>2d6b1c0cc08891107f44356928fc3d86</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Set Scratchpad Values</sys_name>
         <sys_overrides/>
         <sys_package display_value="Loaner Request" source="x_cdltd_loaner_req">38a3876fc0b741107f44356928fc3da0</sys_package>
@@ -47,7 +47,7 @@
         <sys_scope display_value="Loaner Request">38a3876fc0b741107f44356928fc3da0</sys_scope>
         <sys_update_name>sys_script_2d6b1c0cc08891107f44356928fc3d86</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-06-07 17:55:13</sys_updated_on>
+        <sys_updated_on>2022-06-07 21:31:10</sys_updated_on>
         <template/>
         <when>before_display</when>
     </sys_script>
