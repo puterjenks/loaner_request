@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element extends="task" label="Loaner Request" max_length="40" name="x_cdltd_loaner_req_loaner_request" sizeclass="5" type="collection">
+    <element extends="task" label="Loaner Request" max_length="40" name="x_cdltd_loaner_req_loaner_request" sizeclass="6" type="collection">
         <element attributes="edge_encryption_enabled=true" choice="3" default="sc" label="Depot" max_length="40" name="depot" type="string">
             <choice>
                 <element inactive_on_update="false" label="New York" sequence="0" value="ny"/>
@@ -19,9 +19,13 @@
                 <element inactive_on_update="false" label="Projector" sequence="2" value="cmdb_ci_projector"/>
             </choice>
         </element>
+        <element attributes="edge_encryption_enabled=true" label="Overdue reminder" max_length="40" name="last_overdue_reminder" type="glide_date_time"/>
         <element attributes="edge_encryption_enabled=true" label="Location to be used" max_length="40" name="location_to_be_used" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Other" max_length="40" name="other" type="string"/>
+        <element label="Overdue cound" max_length="40" name="overdue_count" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Pick up reminder" max_length="40" name="pick_up_reminder" type="glide_date_time"/>
         <element attributes="encode_utf8=false" label="Requested for" mandatory="true" max_length="32" name="requested_for" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Return reminder" max_length="40" name="return_reminder" type="glide_date_time"/>
         <element attributes="edge_encryption_enabled=true" label="Start date" mandatory="true" max_length="40" name="start_date" type="glide_date_time"/>
     </element>
 </database>
