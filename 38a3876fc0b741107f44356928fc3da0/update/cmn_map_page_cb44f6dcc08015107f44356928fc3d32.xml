@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="cmn_map_page">
+    <cmn_map_page action="INSERT_OR_UPDATE">
+        <center_address>Yogododji, Africa</center_address>
+        <center_latitude/>
+        <center_longitude/>
+        <controls_size>large</controls_size>
+        <coordinates_retrieved_on/>
+        <disable_map_controls/>
+        <disable_nav_bar>false</disable_nav_bar>
+        <filter/>
+        <initial_zoom>2</initial_zoom>
+        <name>x_cdltd_loaner_req_Requested for Locatio</name>
+        <overview>false</overview>
+        <refresh_on_zoom>false</refresh_on_zoom>
+        <roles/>
+        <script><![CDATA[var gr = new GlideRecord('x_cdltd_loaner_req_loaner_request');
+gr.addEncodedQuery("active=true^requested_for.cityISNOTEMPTY");
+gr.query();
+
+while(gr.next()){
+	
+	//  Add copied  REST Message Script BELOW this line
+ var r = new sn_ws.RESTMessageV2('x_cdltd_loaner_req.Get Lat Long', 'Default GET');
+ r.setStringParameterNoEscape('addr', gr.requested_for.city);
+ r.setStringParameterNoEscape('country', gr.requested_for.country);
+ r.setStringParameterNoEscape('count', '1');
+ r.setStringParameterNoEscape('lang', 'en');
+
+//override authentication profile 
+//authentication type ='basic'/ 'oauth2'
+//r.setAuthenticationProfile(authentication type, profile name);
+
+//set a MID server name if one wants to run the message on MID
+//r.setMIDServer('MY_MID_SERVER');
+
+//if the message is configured to communicate through ECC queue, either
+//by setting a MID server or calling executeAsync, one needs to set skip_sensor
+//to true. Otherwise, one may get an intermittent error that the response body is null
+//r.setEccParameter('skip_sensor', true);
+
+ var response = r.execute();
+ var responseBody = response.getBody();
+ var httpStatus = response.getStatusCode();
+	
+	
+	//  Add copied REST Message script ABOVE this line
+	
+	
+	// Extract latitude and longitude values from REST Message response
+	var xmlDoc = new XMLDocument2();
+	xmlDoc.parseXML(responseBody);
+	var myLat= xmlDoc.getNodeText("//latitude");
+	var myLong= xmlDoc.getNodeText("//longitude");
+	
+	// Plot each Requested for's location on a google map
+	var item = map.addItem(gr);
+	item.latitude = String(myLat);
+	item.longitude = String(myLong);
+	item.dialog_title = gr.getDisplayValue();
+	item.icon = "https://maps.google.com/mapfiles/ms/micons/yellow.png";
+	item.icon_width = "32";
+	item.icon_height = "32";
+}
+
+]]></script>
+        <show_device_location>true</show_device_location>
+        <suffix>Requested for Locations</suffix>
+        <sys_class_name>cmn_map_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-06-08 23:42:00</sys_created_on>
+        <sys_id>cb44f6dcc08015107f44356928fc3d32</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_cdltd_loaner_req_Requested for Locatio</sys_name>
+        <sys_package display_value="Loaner Request" source="x_cdltd_loaner_req">38a3876fc0b741107f44356928fc3da0</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">38a3876fc0b741107f44356928fc3da0</sys_scope>
+        <sys_update_name>cmn_map_page_cb44f6dcc08015107f44356928fc3d32</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-06-08 23:51:45</sys_updated_on>
+        <type>terrain</type>
+        <type_selection>buttons</type_selection>
+        <use_advanced_configuration>false</use_advanced_configuration>
+    </cmn_map_page>
+</record_update>
